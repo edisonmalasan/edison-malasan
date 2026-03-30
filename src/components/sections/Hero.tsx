@@ -9,9 +9,10 @@ import ICON_RESUME from "../../assets/icons/resume.json";
 
 interface HeroProps {
   setBg: (colors: { background: string; fill: string }) => void;
+  onOpenAppointment: () => void;
 }
 
-export default function Hero({ setBg }: HeroProps) {
+export default function Hero({ setBg, onOpenAppointment }: HeroProps) {
   const talkRef = useRef<Player>(null);
   const resumeRef = useRef<Player>(null);
 
@@ -117,8 +118,9 @@ export default function Hero({ setBg }: HeroProps) {
 
         {/* CTA Buttons */}
         <div className="flex flex-wrap items-center gap-3 md:gap-4 mt-6 md:mt-8 pl-2">
-          <a
-            href="#contact"
+          <button
+            type="button"
+            onClick={onOpenAppointment}
             className="
               group relative flex items-center gap-2 px-5 md:px-7 py-3 min-h-[44px]
               bg-red-500/10 text-white
@@ -138,7 +140,7 @@ export default function Hero({ setBg }: HeroProps) {
               size={20}
               colors="primary:#ffffff"
             />
-          </a>
+          </button>
           <a
             href="#"
             className="

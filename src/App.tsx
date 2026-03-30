@@ -11,12 +11,14 @@ import ProjectsSection from "./components/sections/Projects";
 import CertificationSection from "./components/sections/Certification";
 import Footer from "./components/sections/Footer";
 import Preloader from "@/components/Preloader";
+import AppointmentModal from "@/components/AppointmentModal";
 
 export default function App() {
   const [bg, setBg] = useState({
     background: "#000000",
     fill: "#271E37",
   });
+  const [appointmentOpen, setAppointmentOpen] = useState(false);
 
   return (
     <>
@@ -68,7 +70,7 @@ export default function App() {
           parallaxOn
           hoverDuration={0.2}
         />
-        <StickyNav />
+        <StickyNav onOpenAppointment={() => setAppointmentOpen(true)} />
         <main className="mx-4 sm:mx-8 md:mx-[80px] lg:mx-[140px] px-3 relative z-10 text-white flex flex-col items-center transition-colors duration-500 overflow-x-hidden">
           {/* Blue Spotlight Background for all sections */}
           <div
@@ -84,7 +86,7 @@ export default function App() {
               `,
             }}
           />
-          <Hero setBg={setBg} />
+          <Hero setBg={setBg} onOpenAppointment={() => setAppointmentOpen(true)} />
           <About />
           <TechStack />
           <CurrentProjectSection />
@@ -92,6 +94,10 @@ export default function App() {
           <CertificationSection />
         </main>
         <Footer />
+        <AppointmentModal
+          isOpen={appointmentOpen}
+          onClose={() => setAppointmentOpen(false)}
+        />
       </ClickSpark>
     </>
   );

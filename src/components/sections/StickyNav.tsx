@@ -4,7 +4,6 @@ import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { Player } from "@lordicon/react";
 import ICON_TALK from "../../assets/icons/talk.json";
-import AppointmentModal from "@/components/AppointmentModal";
 import StaggeredMenu from "@/components/StaggeredMenu";
 
 const navItems = [
@@ -14,10 +13,9 @@ const navItems = [
   { name: "Certifications", link: "#certifications" },
 ];
 
-export default function FloatingNavbar() {
+export default function FloatingNavbar({ onOpenAppointment }: { onOpenAppointment: () => void }) {
   const [scrolled, setScrolled] = useState(false);
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
-  const [appointmentOpen, setAppointmentOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const talkRef = useRef<Player>(null);
 
@@ -126,7 +124,7 @@ export default function FloatingNavbar() {
 
           {/* Right: CTA Button */}
           <button
-            onClick={() => setAppointmentOpen(true)}
+            onClick={onOpenAppointment}
             onMouseEnter={() => talkRef.current?.playFromBeginning()}
             className={cn(
               "cursor-target flex items-center gap-2.5 shrink-0",
@@ -173,10 +171,6 @@ export default function FloatingNavbar() {
       </div>
 
       {/* Appointment Modal */}
-      <AppointmentModal
-        isOpen={appointmentOpen}
-        onClose={() => setAppointmentOpen(false)}
-      />
     </>
   );
 }
