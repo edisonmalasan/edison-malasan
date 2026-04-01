@@ -8,12 +8,16 @@ import StaggeredMenu from "@/components/StaggeredMenu";
 
 const navItems = [
   { name: "About", link: "#about" },
-  { name: "Stack", link: "#stack" },
+  { name: "Tools", link: "#stack" },
   { name: "Projects", link: "#projects" },
   { name: "Certifications", link: "#certifications" },
 ];
 
-export default function FloatingNavbar({ onOpenAppointment }: { onOpenAppointment: () => void }) {
+export default function FloatingNavbar({
+  onOpenAppointment,
+}: {
+  onOpenAppointment: () => void;
+}) {
   const [scrolled, setScrolled] = useState(false);
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
   const [activeSection, setActiveSection] = useState("");
