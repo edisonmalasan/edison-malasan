@@ -8,6 +8,8 @@ import {
   GithubIcon,
   ChevronLeft,
   ChevronRight,
+  Lock,
+  Unlock,
 } from "lucide-react";
 import SpotlightCard from "../SpotlightCard";
 
@@ -21,6 +23,53 @@ interface Project {
   techStack: string[];
   githubUrl?: string;
   liveUrl?: string;
+  repoType?: "public" | "private";
+}
+
+// ─── Repo Badge ───────────────────────────────────────
+function RepoBadge({ type }: { type: "public" | "private" }) {
+  const isPrivate = type === "private";
+  return (
+    <div
+      className="relative flex items-center justify-center overflow-hidden flex-shrink-0"
+      style={{
+        fontFamily: "'JetBrains Mono', monospace",
+        padding: "4px 7px",
+        borderRadius: 4,
+        border: isPrivate
+          ? "1px solid rgba(239,68,68,0.25)"
+          : "1px solid rgba(255,255,255,0.08)",
+        background: isPrivate
+          ? "linear-gradient(90deg, rgba(239,68,68,0.12) 0%, rgba(239,68,68,0.04) 100%)"
+          : "linear-gradient(90deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%)",
+      }}
+    >
+      {/* scanline shimmer */}
+      <span
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background: isPrivate
+            ? "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(239,68,68,0.03) 2px, rgba(239,68,68,0.03) 4px)"
+            : "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.015) 2px, rgba(255,255,255,0.015) 4px)",
+        }}
+      />
+
+      {isPrivate ? (
+        <Lock
+          className="relative w-3.5 h-3.5"
+          style={{
+            color: "rgba(239,68,68,0.85)",
+            filter: "drop-shadow(0 0 4px rgba(239,68,68,0.5))",
+          }}
+        />
+      ) : (
+        <Unlock
+          className="relative w-3.5 h-3.5"
+          style={{ color: "rgba(255,255,255,0.28)" }}
+        />
+      )}
+    </div>
+  );
 }
 
 // ─── Current Project Data ────────────────────────────
@@ -40,8 +89,7 @@ const currentProjects: Project[] = [
       "Supabase",
       "Shadcn",
     ],
-    // githubUrl: "https://github.com",
-    // liveUrl: "https://example.com",
+    repoType: "public",
   },
   {
     id: 2,
@@ -60,8 +108,7 @@ const currentProjects: Project[] = [
       "JWT",
       "OAuth",
     ],
-    // githubUrl: "https://github.com",
-    // liveUrl: "https://example.com",
+    repoType: "private",
   },
 ];
 
@@ -205,11 +252,7 @@ export default function CurrentProjectSection() {
                       opacity: 0,
                       filter: "blur(8px)",
                     }),
-                    center: {
-                      x: 0,
-                      opacity: 1,
-                      filter: "blur(0px)",
-                    },
+                    center: { x: 0, opacity: 1, filter: "blur(0px)" },
                     exit: (d: number) => ({
                       x: d > 0 ? -40 : 40,
                       opacity: 0,
@@ -240,7 +283,7 @@ export default function CurrentProjectSection() {
 
                       {/* Overlay Links */}
                       <div className="absolute inset-0 bg-black/60 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        {project.githubUrl && (
+                        {project.githubUrl && project.repoType === "public" && (
                           <a
                             href={project.githubUrl}
                             target="_blank"
@@ -250,7 +293,7 @@ export default function CurrentProjectSection() {
                             <GithubIcon className="w-5 h-5 text-white" />
                           </a>
                         )}
-                        {project.liveUrl && (
+                        {project.liveUrl && project.repoType === "public" && (
                           <a
                             href={project.liveUrl}
                             target="_blank"
@@ -265,18 +308,26 @@ export default function CurrentProjectSection() {
 
                     {/* ── Body ── */}
                     <div className="p-4 sm:p-6 flex flex-col gap-3">
-                      {/* Category */}
-                      <div className="flex items-center gap-2">
-                        <CatIcon className="w-4 h-4 text-red-500" />
-                        <span
-                          className="text-[10px] font-bold uppercase tracking-widest text-neutral-500"
-                          style={{ fontFamily: "'JetBrains Mono', monospace" }}
-                        >
-                          --type=
-                          {project.categoryLabel
-                            .toLowerCase()
-                            .replace(/\s+/g, "-")}
-                        </span>
+                      {/* Category and Repo Type */}
+                      <div className="flex items-center justify-between gap-2">
+                        <div className="flex items-center gap-2 min-w-0">
+                          <CatIcon className="w-4 h-4 text-red-500 flex-shrink-0" />
+                          <span
+                            className="text-[10px] font-bold uppercase tracking-widest text-neutral-500 truncate"
+                            style={{
+                              fontFamily: "'JetBrains Mono', monospace",
+                            }}
+                          >
+                            --type=
+                            {project.categoryLabel
+                              .toLowerCase()
+                              .replace(/\s+/g, "-")}
+                          </span>
+                        </div>
+
+                        {project.repoType && (
+                          <RepoBadge type={project.repoType} />
+                        )}
                       </div>
 
                       {/* Title */}
@@ -301,7 +352,6 @@ export default function CurrentProjectSection() {
                             </span>
                           ))}
 
-                          {/* +N more / − show less toggle */}
                           {hasOverflow && (
                             <button
                               onClick={() => toggleTags(project.id)}
