@@ -71,7 +71,7 @@ const techStack: Category[] = [
       {
         name: "Modular Architecture",
         tier: "B",
-        icon: "src/assets/modular.png",
+        icon: "public/modular.png",
       },
     ],
   },
