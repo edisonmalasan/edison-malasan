@@ -7,7 +7,7 @@ export default function About() {
     {
       lat: 16.4023,
       lng: 120.596,
-      src: "src/assets/EdisonYellowBG.png",
+      src: "/current-projects/EdisonYellowBG.png",
       label: "Baguio City, Philippines",
     },
   ];
@@ -20,7 +20,7 @@ export default function About() {
     { label: "Status", value: "Computer Science Student" },
     { label: "University", value: "Saint Louis University" },
     { label: "Based in", value: "Baguio City, Philippines" },
-    { label: "Focus", value: "Full-Stack Development" },
+    { label: "Focus", value: "Backend Development" },
     {
       label: "Seeking",
       value: "Full-time & Part-time Opportunities",
