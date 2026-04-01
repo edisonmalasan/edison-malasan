@@ -12,6 +12,7 @@ import CertificationSection from "./components/sections/Certification";
 import Footer from "./components/sections/Footer";
 import Preloader from "@/components/Preloader";
 import AppointmentModal from "@/components/AppointmentModal";
+import ResumeModal from "@/components/ResumeModal";
 
 export default function App() {
   const [bg, setBg] = useState({
@@ -19,6 +20,7 @@ export default function App() {
     fill: "#271E37",
   });
   const [appointmentOpen, setAppointmentOpen] = useState(false);
+  const [resumeOpen, setResumeOpen] = useState(false);
 
   return (
     <>
@@ -86,7 +88,7 @@ export default function App() {
               `,
             }}
           />
-          <Hero setBg={setBg} onOpenAppointment={() => setAppointmentOpen(true)} />
+          <Hero setBg={setBg} onOpenAppointment={() => setAppointmentOpen(true)} onOpenResume={() => setResumeOpen(true)} />
           <About />
           <TechStack />
           <CurrentProjectSection />
@@ -97,6 +99,10 @@ export default function App() {
         <AppointmentModal
           isOpen={appointmentOpen}
           onClose={() => setAppointmentOpen(false)}
+        />
+        <ResumeModal
+          isOpen={resumeOpen}
+          onClose={() => setResumeOpen(false)}
         />
       </ClickSpark>
     </>

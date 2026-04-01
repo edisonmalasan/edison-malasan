@@ -1,5 +1,4 @@
 import React, { useRef, useEffect, useCallback } from "react";
-import { useTheme } from "@/components/theme-provider";
 
 interface ClickSparkProps {
   sparkColor?: string;
@@ -20,7 +19,6 @@ interface Spark {
 }
 
 const ClickSpark: React.FC<ClickSparkProps> = ({
-  sparkColor,
   sparkSize = 10,
   sparkRadius = 15,
   sparkCount = 8,

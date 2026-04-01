@@ -18,7 +18,7 @@ interface SceneProps {
   setBg?: (colors: { background: string; fill: string }) => void;
 }
 
-export default function Scene({ setBg }: SceneProps) {
+export default function Scene({}: SceneProps) {
   const sphere = useRef<THREE.Mesh>(null!);
   const light = useRef<THREE.Light>(null!);
   const [hovered, setHovered] = useState(false);

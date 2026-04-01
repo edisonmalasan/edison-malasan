@@ -10,9 +10,10 @@ import ICON_RESUME from "../../assets/icons/resume.json";
 interface HeroProps {
   setBg: (colors: { background: string; fill: string }) => void;
   onOpenAppointment: () => void;
+  onOpenResume: () => void;
 }
 
-export default function Hero({ setBg, onOpenAppointment }: HeroProps) {
+export default function Hero({ setBg, onOpenAppointment, onOpenResume }: HeroProps) {
   const talkRef = useRef<Player>(null);
   const resumeRef = useRef<Player>(null);
 
@@ -141,8 +142,9 @@ export default function Hero({ setBg, onOpenAppointment }: HeroProps) {
               colors="primary:#ffffff"
             />
           </button>
-          <a
-            href="#"
+          <button
+            type="button"
+            onClick={onOpenResume}
             className="
               flex items-center gap-2 px-5 md:px-7 py-3 min-h-[44px]
               border-[1.5px] border-gray-700/80 text-gray-400
@@ -162,7 +164,7 @@ export default function Hero({ setBg, onOpenAppointment }: HeroProps) {
               colors="primary:#9ca3af"
             />
             VIEW RESUME
-          </a>
+          </button>
         </div>
       </div>
 

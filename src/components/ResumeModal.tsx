@@ -1,15 +1,12 @@
 import { motion, AnimatePresence } from "motion/react";
 import { useEffect, useCallback } from "react";
 
-interface AppointmentModalProps {
+interface ResumeModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-export default function AppointmentModal({
-  isOpen,
-  onClose,
-}: AppointmentModalProps) {
+export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -48,11 +45,6 @@ export default function AppointmentModal({
             onClick={onClose}
           />
 
-          {/*
-           * Outer wrapper: sits ABOVE the iframe and provides the close button
-           * in the top-right corner of the BACKDROP — not on top of the iframe.
-           * The close button is placed outside the iframe box entirely.
-           */}
           <motion.div
             className="relative flex flex-col items-end gap-2 w-[95vw] max-w-[900px]"
             initial={{ opacity: 0, scale: 0.9, y: 30 }}
@@ -60,19 +52,19 @@ export default function AppointmentModal({
             exit={{ opacity: 0, scale: 0.92, y: 20 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
           >
-            {/* ── Close button — lives ABOVE the iframe, flush right ── */}
+            {/* ── Header row: label + close button ── */}
             <div className="w-full flex items-center justify-between px-1">
               <span
                 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-neutral-500"
                 style={{ fontFamily: "'JetBrains Mono', monospace" }}
               >
-                <span className="text-red-500">exec</span> schedule_meeting.sh
+                <span className="text-red-500">cat</span> resume.pdf
               </span>
 
               <button
                 onClick={onClose}
-                className="w-9 h-9 cursor-target rounded-full bg-neutral-900/90 border border-white/10 backdrop-blur-sm flex items-center justify-center text-neutral-400 hover:text-white hover:bg-red-500/30 hover:border-red-500/40 transition-all duration-200 cursor-pointer shadow-lg"
-                aria-label="Close appointment modal"
+                className="cursor-target w-9 h-9 rounded-full bg-neutral-900/90 border border-white/10 backdrop-blur-sm flex items-center justify-center text-neutral-400 hover:text-white hover:bg-red-500/30 hover:border-red-500/40 transition-all duration-200 shadow-lg"
+                aria-label="Close resume modal"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -92,10 +84,10 @@ export default function AppointmentModal({
             </div>
 
             {/* ── iframe box ── */}
-            <div className="w-full h-[90vh] lg:w-250 max-h-250 rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-black/60">
+            <div className="w-full h-[85vh] max-h-[800px] rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-black/60">
               <iframe
-                src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3YPc5aagKrp6Fgrpb6S8-U31Bpo10DSuIlXV0abBqEVXHFdcQ-I1d4nhEVIP0Z8pfeZAPXKDou?gv=true"
-                title="Book an appointment"
+                src="https://flowcv.com/resume/16j0i4s20nan"
+                title="Edison Malasan — Resume"
                 className="w-full h-full border-0 bg-white"
                 loading="lazy"
               />
