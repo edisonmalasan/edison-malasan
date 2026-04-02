@@ -78,7 +78,7 @@ const currentProjects: Project[] = [
     id: 1,
     title: "Study Match",
     shortDescription:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "AI Flashcard web application that generates flashcards based on user-provided topics using Groq API.",
     categoryLabel: "Web App",
     image: "/current-projects/placeholder.png",
     techStack: [
@@ -90,13 +90,31 @@ const currentProjects: Project[] = [
       "Shadcn",
     ],
     githubUrl: "https://github.com/edisonmalasan/study-match-app",
-    repoType: "public",
+    repoType: "private",
   },
   {
     id: 2,
+    title: "MaftyCV",
+    shortDescription:
+      "A resume app builder that allows users to create and customize their resumes using a variety of templates and styles.",
+    categoryLabel: "Web App",
+    image: "/current-projects/placeholder.png",
+    techStack: [
+      "React",
+      "TypeScript",
+      "Node.js",
+      "Express",
+      "Supabase",
+      "Shadcn",
+    ],
+    githubUrl: "https://github.com/edisonmalasan/mafty-cv-app",
+    repoType: "private",
+  },
+  {
+    id: 3,
     title: "SAMCIS Marketplace",
     shortDescription:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "A marketplace project for School of Accountancy, Management, Computing and Information Studies (SAMCIS) by Integrated Confedaracy(ICON) with collabaration with Young Entrepreneurs Society(YES). This repository contains a frontend (React) and backend (Spring) used for development.",
     categoryLabel: "Web App",
     image: "/current-projects/ICON.png",
     techStack: [
