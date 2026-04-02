@@ -117,8 +117,7 @@ const projects: Project[] = [
     categoryLabel: "Script",
     image: "/projects/growtopia.png",
     techStack: ["Lua", "Discord Webhooks", "Pathfinding"],
-    githubUrl:
-      "https://github.com/edisonmalasan/edison-scripts/tree/main/Growtopia/2025/auto-cave",
+    githubUrl: "https://github.com/edisonmalasan/growtopia-auto-caveblast",
     repoType: "private",
   },
   {
@@ -152,7 +151,7 @@ const projects: Project[] = [
     image: "/projects/fields-md.png",
     techStack: ["PHP", "Laravel", "MySQL"],
     githubUrl: "https://github.com/edisonmalasan/HCI-Fields-MD",
-    repoType: "private",
+    repoType: "public",
   },
   {
     id: 8,
@@ -162,9 +161,8 @@ const projects: Project[] = [
     categoryLabel: "Script",
     image: "/projects/growtopia.png",
     techStack: ["Lua", "Pathfinding", "Packet Handling"],
-    githubUrl:
-      "https://github.com/edisonmalasan/edison-scripts/tree/main/Growtopia/2022/plant",
-    repoType: "private",
+    githubUrl: "https://github.com/edisonmalasan/growtopia-auto-plant",
+    repoType: "public",
   },
   {
     id: 9,
@@ -174,9 +172,8 @@ const projects: Project[] = [
     categoryLabel: "Script",
     image: "/projects/growtopia.png",
     techStack: ["Lua", "Packet Injection"],
-    githubUrl:
-      "https://github.com/edisonmalasan/edison-scripts/tree/main/Growtopia/2022/spam",
-    repoType: "private",
+    githubUrl: "https://github.com/edisonmalasan/growtopia-auto-spam",
+    repoType: "public",
   },
   {
     id: 10,
@@ -186,9 +183,8 @@ const projects: Project[] = [
     categoryLabel: "Script",
     image: "/projects/growtopia.png",
     techStack: ["Lua", "Webhooks", "Multi-threading"],
-    githubUrl:
-      "https://github.com/edisonmalasan/edison-scripts/tree/main/Growtopia/2022/rotation",
-    repoType: "private",
+    githubUrl: "https://github.com/edisonmalasan/growtopia-auto-rotation",
+    repoType: "public",
   },
 ];
 

@@ -89,6 +89,7 @@ const currentProjects: Project[] = [
       "Supabase",
       "Shadcn",
     ],
+    githubUrl: "https://github.com/edisonmalasan/study-match-app",
     repoType: "public",
   },
   {
@@ -108,6 +109,8 @@ const currentProjects: Project[] = [
       "JWT",
       "OAuth",
     ],
+    githubUrl:
+      "https://github.com/Integrated-Confederacy-ICON/samcis-marketplace",
     repoType: "private",
   },
 ];
