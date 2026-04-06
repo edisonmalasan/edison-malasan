@@ -114,7 +114,7 @@ const currentProjects: Project[] = [
     id: 3,
     title: "SAMCIS Marketplace",
     shortDescription:
-      "A marketplace project for School of Accountancy, Management, Computing and Information Studies (SAMCIS) by Integrated Confedaracy(ICON) with collabaration with Young Entrepreneurs Society(YES). This repository contains a frontend (React) and backend (Spring) used for development.",
+      "A Progressive Web App marketplace project for School of Accountancy, Management, Computing and Information Studies (SAMCIS) by Integrated Confedaracy(ICON) with collabaration with Young Entrepreneurs Society(YES). This repository contains a frontend (React) and backend (Spring) used for development.",
     categoryLabel: "Web App",
     image: "/current-projects/ICON.png",
     techStack: [
