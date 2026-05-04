@@ -96,7 +96,7 @@ const currentProjects: Project[] = [
     id: 2,
     title: "MaftyCV",
     shortDescription:
-      "A resume app builder that allows users to create and customize their resumes using a variety of templates and styles.",
+      "A resume app builder that allows users to create and customize their resumes using a variety of templates",
     categoryLabel: "Web App",
     image: "/current-projects/placeholder.png",
     techStack: [
