@@ -1,178 +1,117 @@
-import { Canvas } from "@react-three/fiber";
-import Scene from "@/components/Scene";
-import TrueFocus from "@/components/TrueFocus";
-import { useRef } from "react";
-import { Player } from "@lordicon/react";
+import { motion, useReducedMotion } from "motion/react";
+import { ArrowUpRight, FileText } from "lucide-react";
+import SmartImage from "@/components/ui/SmartImage";
+import { CONTACT_LABEL } from "@/lib/site";
 
-import ICON_TALK from "../../assets/icons/talk.json";
-import ICON_RESUME from "../../assets/icons/resume.json";
-
-interface HeroProps {
-  setBg: (colors: { background: string; fill: string }) => void;
+type HeroProps = {
   onOpenAppointment: () => void;
   onOpenResume: () => void;
-}
+};
 
-export default function Hero({ setBg, onOpenAppointment, onOpenResume }: HeroProps) {
-  const talkRef = useRef<Player>(null);
-  const resumeRef = useRef<Player>(null);
+/**
+ * Hero: asymmetric split. Oversized identity on the left, a real project
+ * preview on the right.
+ *
+ * The terminal motif is used here and in the footer only. Four text
+ * elements total: prompt, name, supporting line, actions.
+ */
+export default function Hero({
+  onOpenAppointment,
+  onOpenResume,
+}: HeroProps) {
+  const reduceMotion = useReducedMotion();
+
+  // Staggered entrance: a short sequence that sets the reading order.
+  const rise = (delay: number) =>
+    reduceMotion
+      ? {}
+      : {
+          initial: { opacity: 0, y: 24 },
+          animate: { opacity: 1, y: 0 },
+          transition: {
+            duration: 0.7,
+            delay,
+            ease: [0.16, 1, 0.3, 1] as const,
+          },
+        };
 
   return (
     <section
       id="hero"
-      className="flex flex-col md:flex-row items-center justify-between min-h-[70vh] md:min-h-[85vh] w-full relative pt-20 md:pt-30 px-4 sm:px-6 md:px-14 lg:px-20 overflow-hidden font-inter"
+      aria-labelledby="hero-title"
+      className="relative flex min-h-[100dvh] items-center pt-24 pb-16 md:pt-28 md:pb-24"
     >
-      {/* LEFT SIDE */}
-      <div className="flex flex-col items-start w-full md:w-[60%] z-10 justify-center py-6 md:py-10">
-        {/* Terminal prompt replacing "Hello, I am" */}
-        <p
-          style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 13 }}
-          className="pl-2 mb-1"
-        >
-          <span style={{ color: "#555" }}>edison@server:~$</span>{" "}
-          <span style={{ color: "#e5e5e5" }}>cat</span>{" "}
-          <span className="text-red-500">profile.md</span>
-        </p>
+      <div className="shell">
+        <div className="grid items-center gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
+          {/* Left: identity */}
+          <div>
+            <motion.p {...rise(0)} className="font-mono text-xs text-text-3">
+              <span className="text-text-3">edison@server:~$</span>{" "}
+              <span className="text-text-2">whoami</span>{" "}
+              <span className="text-accent">-a</span>
+            </motion.p>
 
-        <p
-          style={{
-            fontFamily: "'JetBrains Mono', monospace",
-            fontSize: 12,
-            color: "#555",
-          }}
-          className="pl-2 mb-1"
-        >
-          &gt; loading profile...
-        </p>
-
-        <TrueFocus
-          sentence="EDISON | MALASAN | FULL STACK DEVELOPER"
-          separator="|"
-          manualMode={false}
-          blurAmount={0}
-          borderColor="#ef4444"
-          animationDuration={0.8}
-          pauseBetweenAnimations={1}
-          className="flex-col !items-start !gap-0"
-          wordClassNames={[
-            // EDISON
-            `
-            text-[clamp(2.5rem,7vw,8rem)]
-            font-black font-[system-ui]
-            leading-[0.88]
-            tracking-[-0.04em]
-            uppercase
-            text-white
-            drop-shadow-[0_0_30px_rgba(255,255,255,0.06)]
-            transition-all duration-500
-            hover:drop-shadow-[0_0_50px_rgba(239,68,68,0.2)]
-            `,
-
-            // MALASAN
-            `
-            text-[clamp(2.5rem,7vw,8rem)]
-            font-black font-[system-ui]
-            leading-[0.88]
-            tracking-[-0.04em]
-            uppercase
-            bg-gradient-to-b from-gray-500 via-gray-600 to-gray-800
-            bg-clip-text text-transparent
-            transition-all duration-500
-            hover:from-gray-400 hover:to-gray-700
-            `,
-
-            // ROLE
-            `
-            mt-4
-            text-[clamp(0.65rem,1vw,0.9rem)]
-            tracking-[0.45em]
-            text-gray-500/80
-            font-medium
-            uppercase
-            pl-2
-            `,
-          ]}
-        />
-
-        {/* Terminal-styled location */}
-        <div className="flex flex-col gap-1 mt-6 md:mt-8 pl-2">
-          <div className="flex items-center gap-4">
-            <p
-              style={{
-                fontFamily: "'JetBrains Mono', monospace",
-                fontSize: 13,
-                color: "#555",
-              }}
+            <motion.h1
+              {...rise(0.08)}
+              id="hero-title"
+              className="mt-6 text-[clamp(2.75rem,8vw,5.5rem)] leading-[0.92] font-semibold tracking-[-0.04em]"
             >
-              edison@server:~$ <span style={{ color: "#e5e5e5" }}>whereis</span>{" "}
-              <span style={{ color: "#e5e5e5" }}>edison</span>
-            </p>
+              Edison
+              <br />
+              <span className="text-text-3">Malasan</span>
+            </motion.h1>
+
+            <motion.p
+              {...rise(0.16)}
+              className="mt-6 max-w-[42ch] text-lg leading-relaxed text-text-2"
+            >
+              Full stack developer building web applications from the data
+              model through to the interface people touch.
+            </motion.p>
+
+            <motion.div {...rise(0.24)} className="mt-9 flex flex-wrap gap-3">
+              <button
+                type="button"
+                onClick={onOpenAppointment}
+                className="pressable inline-flex min-h-11 items-center gap-2 rounded-[var(--radius-control)] bg-accent px-5 text-sm font-semibold whitespace-nowrap text-on-accent hover:bg-accent-hover"
+              >
+                {CONTACT_LABEL}
+                <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+              </button>
+              <button
+                type="button"
+                onClick={onOpenResume}
+                className="pressable inline-flex min-h-11 items-center gap-2 rounded-[var(--radius-control)] border border-line-strong px-5 text-sm font-semibold whitespace-nowrap text-text-1 hover:bg-surface-1"
+              >
+                <FileText className="h-4 w-4" aria-hidden="true" />
+                View resume
+              </button>
+            </motion.div>
           </div>
-          <p
-            style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 13 }}
-            className="text-red-500 pl-14"
-          >
-            /usr/bin/philippines
-            <span className="cursor" />
-          </p>
-        </div>
 
-        {/* CTA Buttons */}
-        <div className="flex flex-wrap items-center gap-3 md:gap-4 mt-6 md:mt-8 pl-2">
-          <button
-            type="button"
-            onClick={onOpenAppointment}
-            className="
-              group relative flex items-center gap-2 px-5 md:px-7 py-3 min-h-[44px]
-              bg-red-500/10 text-white
-              border border-red-700
-              font-extrabold tracking-wider uppercase text-xs md:text-sm
-              hover:bg-red-600
-              transition-all duration-300
-              hover:shadow-[0_0_30px_rgba(239,68,68,0.4)]
-              cursor-target
-            "
-            onMouseEnter={() => talkRef.current?.playFromBeginning()}
+          {/* Right: a real project preview rather than a decorative blob */}
+          <motion.figure
+            {...rise(0.2)}
+            className="relative overflow-hidden rounded-[var(--radius-container)] border border-line bg-surface-1 shadow-[var(--shadow-md)]"
           >
-            Let's Talk
-            <Player
-              ref={talkRef}
-              icon={ICON_TALK}
-              size={20}
-              colors="primary:#ffffff"
-            />
-          </button>
-          <button
-            type="button"
-            onClick={onOpenResume}
-            className="
-              flex items-center gap-2 px-5 md:px-7 py-3 min-h-[44px]
-              border-[1.5px] border-gray-700/80 text-gray-400
-              hover:bg-white/5
-              font-extrabold tracking-wider uppercase text-xs md:text-sm
-              hover:border-gray-500 hover:text-gray-200
-              transition-all duration-300
-              hover:shadow-[0_0_15px_rgba(255,255,255,0.05)]
-              cursor-target
-            "
-            onMouseEnter={() => resumeRef.current?.playFromBeginning()}
-          >
-            <Player
-              ref={resumeRef}
-              icon={ICON_RESUME}
-              size={18}
-              colors="primary:#9ca3af"
-            />
-            VIEW RESUME
-          </button>
+            <div className="aspect-4/3 w-full">
+              <SmartImage
+                src="/projects/navi-bites.png"
+                alt="NaviBites, a canteen food ordering web application built with React, Express, and MongoDB"
+                width={960}
+                height={720}
+                loading="eager"
+                fetchPriority="high"
+              />
+            </div>
+            <figcaption className="flex items-center justify-between gap-4 border-t border-line px-4 py-3">
+              <span className="font-mono text-xs text-text-3">NaviBites</span>
+              <span className="font-mono text-xs text-text-3">
+                React / Express / MongoDB
+              </span>
+            </figcaption>
+          </motion.figure>
         </div>
-      </div>
-
-      {/* RIGHT SIDE — 3D Canvas */}
-      <div className="w-full md:w-[40%] h-[300px] sm:h-[400px] md:h-[650px] relative">
-        <Canvas dpr={[1, 2]}>
-          <Scene setBg={setBg} />
-        </Canvas>
       </div>
     </section>
   );
